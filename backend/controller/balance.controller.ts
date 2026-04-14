@@ -5,7 +5,7 @@ import { User } from "../model/user.model";
 
 export const addBalance = async (req: Request, res: Response) => {
     try {
-        const userId = req.user?._id;
+        const userId = (req.user as any)?._id;
         if (!userId) {
             return res.status(401).json({ success: false, message: "Unauthorized" });
         }
@@ -51,7 +51,7 @@ export const addBalance = async (req: Request, res: Response) => {
 
 export const getTotalBalance = async (req: Request, res: Response) => {
     try {
-        let balance = await User.findOne({ _id: req.user?._id }, { totalBalance: 1 });
+        let balance = await User.findOne({ _id: (req.user as any)?._id }, { totalBalance: 1 });
         if (!balance) {
             return res.status(404).json({ success: false, message: "Balance Not Found" })
         }
@@ -64,7 +64,7 @@ export const getTotalBalance = async (req: Request, res: Response) => {
 
 export const getRecentBalance = async (req: Request, res: Response) => {
     try {
-        let balance = await Balance.find({ userId: req.user?._id }).sort({ createdAt: -1 }).limit(3);
+        let balance = await Balance.find({ userId: (req.user as any)?._id }).sort({ createdAt: -1 }).limit(3);
         if (!balance) {
             return res.status(404).json({ success: false, message: "Recent Balance Not Found" })
         }

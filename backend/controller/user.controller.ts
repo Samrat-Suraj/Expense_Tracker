@@ -207,7 +207,11 @@ export const logoutUser = async (req: Request, res: Response) => {
 
 export const loadUser = async (req: Request, res: Response) => {
     try {
-        let userId = req.user._id
+        if (!req.user) {
+            return res.status(401).json({ success: false, message: "User not authenticated" })
+        }
+
+        let userId = (req.user as any)._id
         let user = await User.findById(userId).select("-password -resetPasswordToken -resetPasswordExpire -verifyPasswordToken")
         if (!user) {
             return res.status(400).json({ success: false, message: "User not found" })

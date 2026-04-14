@@ -1,4 +1,17 @@
+import e from "express";
 import mongoose from "mongoose";
+
+export interface IUser extends mongoose.Document {
+    fullName: string;
+    email: string;
+    password?: string;
+    googleId?: string;
+    verifyPasswordToken?: string;
+    resetPasswordToken?: string;
+    resetPasswordExpire?: Date | null;
+    isVerified: boolean;
+    totalBalance : number
+}
 
 const userSchema = new mongoose.Schema({
     fullName: { type: String, required: true },

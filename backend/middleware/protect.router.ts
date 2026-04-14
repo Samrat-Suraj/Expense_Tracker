@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken"
 import EnvVars from "../config/EnvVars";
-import { User } from "../model/user.model";
+import { IUser, User } from "../model/user.model";
 
 
 declare global {
     namespace Express {
         interface Request {
-            user?: any
+            user?: User
         }
     }
 }
@@ -36,7 +36,7 @@ export const protectRouter = async (req: Request, res: Response, next: NextFunct
             return res.status(404).json({ success: false, message: "User not found. Access denied." });
         }
 
-        req.user = user
+        req.user = user as IUser;
         next()
     } catch (error: any) {
         console.log("Error In protectRouter", error.message)
