@@ -2,7 +2,7 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { setUser } from "../slice/userSlice";
 
-export const USER_ENDPOINT = "http://localhost:5000/user"
+export const USER_ENDPOINT = `https://expense-tracker-2dax.onrender.com/user`
 export const userApi = createApi({
     tagTypes: ["User_Refech"], // Define tag type (like creating a label for cache)
     reducerPath: "userApi",

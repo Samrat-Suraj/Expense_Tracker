@@ -1,7 +1,7 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
 
-export let EXPANCE_ENDPOINT = `http://localhost:5000/expances`
+export let EXPANCE_ENDPOINT = `${process.env.BACKEND_URL}/expances`
 
 export const expanceApi = createApi({
     tagTypes : ["refresh_expance"],
